@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | Sandeep Explores</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      body {
+        background: #0f0d0b;
+        color: #f7efe9;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+      }
+      .profile-shell {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        padding: 60px 0 80px;
+      }
+      .profile-card {
+        background: rgba(27,20,15,0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 26px;
+        padding: 28px;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.18);
+      }
+      .profile-head {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        margin-bottom: 28px;
+      }
+      .profile-avatar {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(255,122,26,0.7);
+      }
+      .profile-meta h1 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3rem);
+        letter-spacing: -0.07em;
+      }
+      .profile-meta p {
+        margin: 0.3rem 0 0;
+        color: #d7c4b7;
+      }
+      .profile-panel-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .panel {
+        background: rgba(18,13,10,0.8);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 20px;
+      }
+      .panel h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        letter-spacing: -0.04em;
+      }
+      .panel ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: #d7c4b7;
+        line-height: 2;
+      }
+      .panel a {
+        color: #ffaf72;
+        text-decoration: none;
+      }
+      .contact-box {
+        margin-top: 28px;
+        background: rgba(255,122,26,0.08);
+        border: 1px solid rgba(255,122,26,0.35);
+        padding: 18px 20px;
+        border-radius: 18px;
+      }
+      .contact-box a {
+        color: #ffaf72;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      @media (max-width: 768px) {
+        .profile-panel-grid { grid-template-columns: 1fr; }
+        .profile-head { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-shell">
+      <div class="profile-card">
+        <div class="profile-head">
+          <img class="profile-avatar" src="media/snaps/dp.jpg" alt="Profile" />
+          <div class="profile-meta">
+            <div class="kicker">Member profile</div>
+            <h1 id="profileName">Loading...</h1>
+            <p id="profileEmail">loading@email.com</p>
+          </div>
+        </div>
+
+        <div class="profile-panel-grid">
+          <div class="panel">
+            <h3>Liked</h3>
+            <ul id="likedList">
+              <li>No items yet.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Saved</h3>
+            <ul id="savedList">
+              <li>No items yet.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div class="kicker">Contact me</div>
+          <p>Reach out for collaborations, recommendations, or a quick chat.</p>
+          <p><a href="mailto:sandeep.explores@gmail.com">sandeep.explores@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

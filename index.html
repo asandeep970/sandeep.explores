@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sandeep Explores — a modern travel, photography, and cinematography portfolio."
+    />
+    <title>Sandeep Explores</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-theme="dark">
+    <header class="site-header">
+      <div class="container navbar">
+        <a href="index.html" class="brand">Sandeep<span>Explores</span></a>
+
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#explore">Explore</a>
+          <a href="#stories">Stories</a>
+          <a href="#videos">Videos</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button id="themeToggle" class="theme-toggle" aria-label="Switch theme">☀️</button>
+          <a id="profileNav" class="btn btn-outline" href="profile.html" style="display: none;">Profile</a>
+          <a id="signInLink" class="btn btn-outline" href="sign-in.html">Sign in</a>
+          <a id="signUpLink" class="btn btn-orange" href="sign-up.html">Create account</a>
+          <button id="logoutButton" class="btn btn-outline" type="button" style="display: none;">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:2.5rem;align-items:center;">
+          <div>
+            <div class="eyebrow">Hyderabad · cinema · creator</div>
+            <h1>Frames from <span>my world</span>.</h1>
+            <p class="lead">
+              I’m Sandeep — a storyteller, photographer, and movie nerd collecting Hyderabad moments, festival energy,
+              AI-generated ideas, and the kind of stories that stay alive after the reel ends.
+            </p>
+            <p class="lead" style="margin-top:-0.8rem; margin-bottom:1.8rem; color: var(--orange-soft); font-weight:700;">
+              Jai Shree Ram 🚩
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-orange" href="#explore">Explore my catalog</a>
+              <a class="btn btn-outline" href="#stories">Read my writes</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-box">
+                <strong>HYD</strong>
+                <span>home city</span>
+              </div>
+              <div class="stat-box">
+                <strong>88+</strong>
+                <span>moments</span>
+              </div>
+              <div class="stat-box">
+                <strong>∞</strong>
+                <span>ideas</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-image-wrap">
+              <img
+                src="media/snaps/dp.jpg"
+                alt="Profile portrait"
+              />
+            </div>
+           
+            
+          </div>
+        </div>
+      </section>
+
+      <section id="explore" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="kicker">01 / My archive</div>
+              <h2>Snaps, movies, travel & more.</h2>
+            </div>
+            <p>
+              From city streets and festive nights to movies, travel, and AI art, this is the visual diary of my everyday perspective.
+            </p>
+          </div>
+
+          <div class="category-grid">
+            <a href="gallery.html?cat=hyderabad" class="category-card card-hyd">
+              <span class="tag">Hyderabad</span>
+              <h3>Old city frames</h3>
+              <p>Charminar vibes, evening lights, chai breaks, and the stories hiding in plain sight.</p>
+            </a>
+
+            <a href="gallery.html?cat=snaps" class="category-card card-snaps">
+              <span class="tag">Snaps</span>
+              <h3>Quick little memories</h3>
+              <p>Unplanned clicks, candid energy, and the best moments from everyday life.</p>
+            </a>
+
+            <a href="gallery.html?cat=festivals" class="category-card card-festive">
+              <span class="tag">Festivals</span>
+              <h3>Celebration energy</h3>
+              <p>Colors, rituals, music, and the feeling of joy that fills the air.</p>
+            </a>
+
+            <a href="gallery.html?cat=movie" class="category-card card-movie">
+              <span class="tag">Movies</span>
+              <h3>Movie frames</h3>
+              <p>Film images and cinematic moments from my collection.</p>
+            </a>
+
+            <a href="gallery.html?cat=travel" class="category-card card-travel">
+              <span class="tag">Travel</span>
+              <h3>Travel moments</h3>
+              <p>Places, routes, and scenes collected along the way.</p>
+            </a>
+
+            <a href="gallery.html?cat=ai" class="category-card card-ai">
+              <span class="tag">AI images</span>
+              <h3>Dream-driven visuals</h3>
+              <p>Futuristic ideas, creative moodboards, and stylized storytelling experiments.</p>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <section id="stories" class="section alt-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="kicker">02 / Journal</div>
+              <h2>Movie reviews, recommendations & tech notes</h2>
+            </div>
+            <p>
+              Movie reviews, recommendation lists, tech notes, and personal observations from the things I watch and use.
+            </p>
+          </div>
+
+          <div class="story-grid">
+            <article class="story-card">
+              <img src="media/movie/images (1).jpg" alt="Movie review" />
+              <div class="story-body">
+                <div class="label">Movie reviews</div>
+                <h3>Best films I’d recommend now</h3>
+                <p>Thoughtful picks for mood, storytelling, craft, and the kind of cinematic wow that lingers.</p>
+                <a class="inline-link" href="reviews.html">Read the list →</a>
+              </div>
+            </article>
+
+            <article class="story-card">
+              <img src="media/hyd/IMG_20261029_210633_634.jpg" alt="Tech review" />
+              <div class="story-body">
+                <div class="label">Tech notes</div>
+                <h3>Phones, gadgets & everyday upgrades</h3>
+                <p>Simple takes on what actually adds value, what’s hype, and what deserves a second look.</p>
+                <a class="inline-link" href="articles.html">See the review →</a>
+              </div>
+            </article>
+
+            <article class="story-card">
+              <img src="media/hyd/20260709_155503.jpg" alt="Cinema watchlist" />
+              <div class="story-body">
+                <div class="label">Personal essays</div>
+                <h3>What I’m watching and why</h3>
+                <p>Film notes, travel thoughts, and observations drawn from cinema, culture, and everyday life.</p>
+                <a class="inline-link" href="articles.html">Open the journal →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="videos" class="section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <div class="kicker">03 / Motion</div>
+              <h2>Reels, videos, and raw city energy.</h2>
+            </div>
+            <p>
+              Travel clips, festival moments, quick edits, and the kind of visual storytelling that doesn’t need a caption to feel alive.
+            </p>
+          </div>
+
+          <div class="video-panel">
+            <div class="video-card">
+              <video class="video-media" autoplay muted loop playsinline poster="media/festive/IMG_20261005_121912_199.jpg">
+                <source src="media/festive/Video-96035.mp4" type="video/mp4" />
+              </video>
+            </div>
+
+            <div class="video-cta">
+              <div class="kicker">Video corner</div>
+              <h3>Short-form, cinematic, real.</h3>
+              <p>
+                This section is set for reels, vlogs, festival clips, Hyderabad street moments, and any future uploads you want to feature.
+              </p>
+              <a class="btn btn-orange" href="videos.html">Watch the feed</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section alt-section">
+        <div class="container" style="display:grid;grid-template-columns:0.82fr 1.18fr;gap:2.5rem;align-items:center;">
+          <div>
+            <img
+              src="media/snaps/dp.jpg"
+              alt="Portrait placeholder"
+              style="border-radius:28px; width:100%; height:540px; object-fit:cover; border:1px solid var(--border); box-shadow:0 30px 70px var(--shadow);"
+            />
+          </div>
+
+          <div>
+            <div class="kicker">04 / About</div>
+            <h2 style="margin:0.8rem 0 1rem; font-size:clamp(2.4rem, 4vw, 4rem); letter-spacing:-0.08em;">I’m Sandeep, and I keep collecting stories.</h2>
+            <p class="lead" style="max-width:650px; margin-bottom:1.1rem;">
+              I build this space around the things I love most: Hyderabad energy, festival mood, photography, good cinema,
+              and the small everyday details that feel cinematic if you pay attention.
+            </p>
+            <p class="lead" style="max-width:650px; margin-bottom:1.4rem; color: var(--orange-soft); font-weight:700;">
+              Jai Shree Ram 🚩
+            </p>
+
+            <div class="hero-stats">
+              <div class="stat-box">
+                <strong>HYD</strong>
+                <span>base</span>
+              </div>
+              <div class="stat-box">
+                <strong>∞</strong>
+                <span>stories</span>
+              </div>
+              <div class="stat-box">
+                <strong>AI</strong>
+                <span>creative</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <div class="cta-shell">
+            <div>
+              <div class="kicker" style="color: rgba(24, 15, 12, 0.8);">05 / Connect</div>
+              <h3>Let’s build a story together.</h3>
+            </div>
+            <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+              <a class="btn btn-light" href="mailto:hello@example.com">hello@example.com</a>
+              <a class="btn btn-light" href="sign-in.html">Member login</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-row">
+        <div>© <span id="year"></span> Sandeep Explores. Built for stories.</div>
+        <div class="footer-links">
+          <a href="#home">Top</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">YouTube</a>
+          <a href="sign-in.html">Login</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="welcomeBanner" class="container" style="padding: 0 0 1rem; color: var(--muted); font-weight: 600;"></div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Story Detail | Sandeep Explores</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      body { background: #0f0d0b; color: #f7efe9; font-family: "Segoe UI", Tahoma, sans-serif; }
+      .page-shell { width: min(1100px, 92vw); margin: 0 auto; padding: 74px 0 70px; }
+      .detail-wrap { background: rgba(27,20,15,0.9); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; overflow: hidden; }
+      .detail-image { width: 100%; height: 430px; object-fit: cover; display:block; }
+      .detail-copy { padding: 28px 24px 30px; }
+      .detail-copy .eyebrow { display: inline-block; margin-bottom: 0.8rem; padding: 0.5rem 0.8rem; border: 1px solid rgba(255,122,26,0.35); border-radius: 999px; background: rgba(255,122,26,0.08); color: #ffaf72; font-size: 0.68rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; }
+      .detail-copy h1 { margin: 0 0 1rem; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: -0.08em; }
+      .detail-copy p { color: #d7c4b7; line-height: 1.9; font-size: 1.04rem; }
+      .detail-copy .meta { margin-top: 1.5rem; color: #ffaf72; font-weight: 700; }
+      .top-actions { display:flex; justify-content:space-between; align-items:center; gap: 15px; margin-bottom: 24px; }
+      @media (max-width: 700px) { .top-actions { display:block; } }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="top-actions">
+        <div class="kicker">Story detail</div>
+        <a class="btn btn-outline" href="javascript:history.back()">← Go back</a>
+      </div>
+
+      <article class="detail-wrap">
+        <div class="detail-copy">
+          <div id="detailEyebrow" class="eyebrow">Review</div>
+          <h1 id="detailTitle">Loading...</h1>
+          <p id="detailText"></p>
+          <div id="detailMeta" class="meta"></div>
+          <div class="story-actions">
+            <button class="btn btn-orange" type="button" data-profile-action="like" data-type="review" data-id="gc">♡ Like</button>
+            <button class="btn btn-outline" type="button" data-profile-action="save" data-type="review" data-id="gc">☆ Save</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <script>
+      const reviewData = {
+        gc: { title: 'Game Changer', category: 'Review', rating: '8.6/10', text: 'Game Changer feels built for the big screen: high stakes, relentless momentum, and a visual rhythm that makes every decision feel impactful. It balances spectacle with tension, and the result is a polished action ride that refuses to lose energy.' },
+        pushpa2: { title: 'Pushpa 2', category: 'Review', rating: '8.4/10', text: 'Pushpa 2 is all about scale, attitude, and character presence. The film is bigger, louder, and more unapologetic, and it works because it never pretends to be anything else — it is a mass-entertainment machine built to hit hard.' },
+        salaar: { title: 'Salaar', category: 'Review', rating: '8.2/10', text: 'Salaar delivers a grim, intense mood with an effective sense of power and danger. It is a film built on atmosphere and conviction, and its strongest scenes land because the world feels grounded and dangerous.' },
+        kalki: { title: 'Kalki 2898 AD', category: 'Review', rating: '8.1/10', text: 'Kalki 2898 AD tries to do a lot — world-building, moral scale, and sci-fi spectacle — and the ambition is visible in every frame. It is not flawless, but it is imaginative, bold, and undeniably cinematic.' },
+        prestige: { title: 'The Prestige', category: 'Review', rating: '8.8/10', text: 'The Prestige is a rare film that rewards attention. Every reveal feels carefully arranged, and the tension between obsession and craft gives the movie a sharp, intelligent edge that stays with you long after the credits roll.' },
+        mickey: { title: 'Mickey 17', category: 'Review', rating: '8.3/10', text: 'Mickey 17 thrives on eccentricity and world-building. It feels more playful than bleak, but it keeps a strong core of existential tension that makes the darker ideas feel purposeful instead of random.' },
+        rrr: { title: 'RRR', category: 'Review', rating: '8.7/10', text: 'RRR is a wildly energetic friendship story with bold action, memorable music, and spectacle that earns its big-screen scale.' },
+        dune2: { title: 'Dune: Part Two', category: 'Review', rating: '8.8/10', text: 'Immersive world-building, striking visuals, and a tense story of power make Dune: Part Two a spectacular continuation.' },
+        oppenheimer: { title: 'Oppenheimer', category: 'Review', rating: '8.6/10', text: 'Oppenheimer is a gripping character study that turns scientific ambition and its consequences into powerful, nerve-racking cinema.' },
+        '12thfail': { title: '12th Fail', category: 'Review', rating: '8.5/10', text: 'An honest, uplifting story about persistence, told with grounded performances and emotion that never feels forced.' },
+        spiderverse: { title: 'Spider-Man: Across the Spider-Verse', category: 'Review', rating: '8.7/10', text: 'A vibrant visual experiment with heartfelt character moments and an ambitious story that leaves you eager for more.' }
+      };
+      const articleData = {
+        'city-night': { title: 'Why I still chase the city after dark', category: 'Article', rating: 'Night notes', text: 'A city after dark always reveals a different version of itself. The traffic slows down, the street light changes the mood, and people become quieter, more honest, more observant. That is when the real stories start to appear.' },
+        'film-essay': { title: 'What makes a film unforgettable?', category: 'Article', rating: 'Cinema essay', text: 'An unforgettable film is not only built on spectacle or scale. It is built on emotional clarity, texture, and the little spark of recognition that makes a viewer feel seen. The best movies leave a mark because they move something in you, not because they try to impress you.' },
+        'tech-hype': { title: 'Phones and hype: what actually matters?', category: 'Article', rating: 'Tech note', text: 'The loudest devices are not always the best devices. The true value lies in how naturally technology fits into daily life — how smooth it feels, how reliable it is, and how much it truly improves the way you work, create, and connect.' }
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get('type') || 'review';
+      const id = params.get('id') || 'gc';
+      const item = type === 'article' ? articleData[id] : reviewData[id];
+
+      const detailEyebrow = document.getElementById('detailEyebrow');
+      const detailTitle = document.getElementById('detailTitle');
+      const detailText = document.getElementById('detailText');
+      const detailMeta = document.getElementById('detailMeta');
+      const likeBtn = document.querySelector('[data-profile-action="like"]');
+      const saveBtn = document.querySelector('[data-profile-action="save"]');
+
+      if (item) {
+        detailEyebrow.textContent = item.category;
+        detailTitle.textContent = item.title;
+        detailText.textContent = item.text;
+        detailMeta.textContent = item.rating;
+        if (likeBtn) {
+          likeBtn.dataset.type = type;
+          likeBtn.dataset.id = id;
+        }
+        if (saveBtn) {
+          saveBtn.dataset.type = type;
+          saveBtn.dataset.id = id;
+        }
+      } else {
+        detailTitle.textContent = 'Story not found';
+        detailText.textContent = 'This story could not be loaded. Please return to the list and choose another item.';
+      }
+    </script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

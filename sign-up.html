@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create account | Sandeep Explores</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-theme="dark">
+    <main class="auth-layout">
+      <section class="auth-card">
+        <div class="auth-top">
+          <a class="brand" href="index.html">Sandeep<span>Explores</span></a>
+          <h1>Create account</h1>
+          <p>Start your personal travel and story journal.</p>
+        </div>
+
+        <form class="auth-form" id="signUpForm">
+          <div class="form-floating">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Your name" required />
+          </div>
+
+          <div class="form-floating">
+            <label for="email">Email address</label>
+            <input id="email" type="email" placeholder="name@example.com" required />
+          </div>
+
+          <div class="form-floating">
+            <label for="password">Password</label>
+            <input id="password" type="password" placeholder="Create a password" required />
+          </div>
+
+          <button class="btn btn-orange" type="submit">Create account</button>
+        </form>
+
+        <p class="switch-text">Already have an account? <a href="sign-in.html">Sign in</a></p>
+        <div id="authMessage" class="auth-message" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

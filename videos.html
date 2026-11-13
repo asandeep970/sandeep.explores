@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Videos | Sandeep Explores</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      body { background: #0f0d0b; color: #f7efe9; font-family: "Segoe UI", Tahoma, sans-serif; }
+      .page-shell { width: min(1180px, 92vw); margin: 0 auto; padding: 74px 0 70px; }
+      .header-row { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 24px; }
+      .header-row h1 { margin: 0.5rem 0 0; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.08em; }
+      .featured-player {
+        padding: 14px;
+        margin-bottom: 32px;
+        background: rgba(26,20,16,0.8);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 26px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .featured-player:focus-within { border-color: rgba(255,122,26,0.7); box-shadow: 0 24px 60px rgba(255,122,26,0.12); }
+      .featured-player video {
+        width: 100%;
+        height: min(72vh, 760px);
+        min-height: 340px;
+        display: block;
+        background: #111;
+        border-radius: 18px;
+        cursor: pointer;
+      }
+      .featured-controls { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+      .featured-controls button, .load-more, .video-speed-control select {
+        padding: 0.8rem 1.2rem;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 999px;
+        color: #f7efe9;
+        background: #21160f;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+      }
+      .featured-controls button:hover, .load-more:hover, .video-speed-control select:hover { border-color: #ff7a1a; }
+      .featured-controls button:focus-visible, .load-more:focus-visible, .video-speed-control select:focus-visible {
+        outline: 2px solid #ff9d4e;
+        outline-offset: 3px;
+      }
+      .featured-controls .featured-next { background: linear-gradient(135deg, #ff7a1a, #ff9d4e); color: #1f120d; border-color: transparent; }
+      .video-speed-control { display: inline-flex; align-items: center; gap: 8px; color: #ffaf72; font-weight: 700; }
+      .video-speed-control select { padding: 0.65rem 0.9rem; }
+      .video-speed-control option { background: #21160f; color: #f7efe9; }
+      .video-position { margin-left: auto; color: #ffaf72; font-weight: 700; }
+      .playback-status { min-height: 1.5em; margin: 10px 0 0; color: #d7c4b7; }
+      .video-card { transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+      .video-card:hover { transform: translateY(-4px); border-color: rgba(255,122,26,0.55); box-shadow: 0 18px 42px rgba(255,122,26,0.1); }
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 18px;
+      }
+      .video-section { margin-top: 32px; }
+      .video-section h2 { margin: 0 0 18px; font-size: 2rem; letter-spacing: -0.06em; }
+      .video-card {
+        background: rgba(27,20,15,0.9);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .video-card video {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        background: #111;
+        cursor: pointer;
+      }
+      .video-copy { padding: 18px; }
+      .video-copy .label { color: #ffaf72; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; }
+      .video-copy h3 { margin: 0.8rem 0 0.5rem; font-size: 1.7rem; letter-spacing: -0.06em; }
+      .video-speed-control { margin-top: 12px; font-size: 0.9rem; }
+      .card-playback-status { font-size: 0.85rem; }
+      .load-more-wrap { text-align: center; margin-top: 28px; }
+      .load-more { background: linear-gradient(135deg, #ff7a1a, #ff9d4e); color: #1f120d; border-color: transparent; }
+      @media (max-width: 900px) {
+        .video-grid { grid-template-columns: 1fr; }
+        .header-row { display: block; }
+      }
+      @media (max-width: 600px) {
+        .featured-player video { height: 55vh; min-height: 260px; }
+        .featured-controls { flex-wrap: wrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="header-row">
+        <div>
+          <div class="kicker">Motion</div>
+          <h1>Videos & reels</h1>
+        </div>
+        <a class="btn btn-outline" href="index.html">← Back home</a>
+      </div>
+
+      <section class="featured-player" aria-label="Featured reel player">
+        <video id="featuredVideo" controls playsinline preload="metadata"></video>
+        <div class="featured-controls">
+          <button id="previousVideo" type="button">← Previous</button>
+          <button class="featured-next" id="nextVideo" type="button">Next video →</button>
+          <label class="video-speed-control">
+            <span>Speed</span>
+            <select id="featuredSpeed" aria-label="Featured video playback speed">
+              <option value="0.5">0.5× Slow</option>
+              <option value="0.75">0.75×</option>
+              <option value="1" selected>1× Normal</option>
+              <option value="1.25">1.25×</option>
+              <option value="1.5">1.5×</option>
+              <option value="2">2× Fast</option>
+            </select>
+          </label>
+          <span class="video-position" id="videoPosition" aria-live="polite"></span>
+        </div>
+        <p class="playback-status" id="playbackStatus" aria-live="polite"></p>
+      </section>
+
+      <section class="video-section" aria-labelledby="snaps-heading">
+        <h2 id="snaps-heading">Snaps</h2>
+        <div class="video-grid" id="snapsVideos"></div>
+      </section>
+
+      <section class="video-section" aria-labelledby="festive-heading">
+        <h2 id="festive-heading">Festive</h2>
+        <div class="video-grid" id="festiveVideos"></div>
+      </section>
+
+      <div class="load-more-wrap">
+        <button class="load-more" id="loadMoreVideos" type="button">Load more videos</button>
+      </div>
+    </div>
+    <script>
+      const videos = [
+        { category: 'snaps', title: 'Snap reel 1', src: 'media/reels/snap/AQMxw4ZbrA7n0NrFoebbXfokEpkQ2MCYntEjl3voXGz6V-g81PdX77n3coCyK_k2jMROL2eDcMW1wVmvl2WH-xWKXoPcUxOAclmo3AE.mp4' },
+        { category: 'festive', title: 'Festive reel 1', src: 'media/reels/festive/AQM2CiIwBXq1rW21iHDSYPzX57Y6bAcEq8ICoSYjIFs6Gk1aMYvqecs4ZdSloJED5_W1C3tcIUt9GUtLoTXu1bV5mnPL-NEH80Rpwtw.mp4' },
+        { category: 'snaps', title: 'Snap reel 2', src: 'media/reels/snap/AQM_C61wmhQdqWwOoEEjf2TEQH3rUGpN5ieSk62YfUX4aoU80St58VuTSW-VttECLtnG_6bvwYokp65-mB_6rpmydWzwXE9wYgAvhho.mp4' },
+        { category: 'festive', title: 'Festive reel 2', src: 'media/reels/festive/AQNNoNF18Z64AbW35YCboF8Yc3YW9KAU8FwTb0Tgi1GkVS_pMkXtxuQi_0Ncv32Xq6gQf0ilxZ3aK3SiHltFbbCON6dUn38p_f5e6BA.mp4' },
+        { category: 'snaps', title: 'Snap reel 3', src: 'media/reels/snap/AQNhLbcru2yOfg9Uq0MvN0RFZwrdRWzm1e0GP2tohHXJw2q5cMUixSgFbOYIqFEj_HA55pccA6qfeegORAFpYeh9X1yfwJ_mEdBY-DA.mp4' },
+        { category: 'festive', title: 'Festive reel 3', src: 'media/reels/festive/AQO2pNyzthSWjdLZJ2WFo_fC-RCYxqBy9jXw2ZuxelzkmSUluaUB9tZRw8FqQpLX3b7hlvukXrXiijLf5HJ4wY53LY8SRmCHRuqzRp0%20(1).mp4' },
+        { category: 'snaps', title: 'Snap reel 4', src: 'media/reels/snap/AQNXRfXA-2NM3cmKEq2Ci4BXl4_VHyHf3_Ki1u4TNtKuOkF6H4CiOUmVarbw-dp0IJ3cRw6VXbbf6IP7Ei52fV8G0it2LOU6Vj78rdo.mp4' },
+        { category: 'festive', title: 'Festive reel 4', src: 'media/reels/festive/AQOsXSzIJF7oyTolGzNTFu1gNus3AHmoEf59cRnUFqur96KDNgeBL7Cm_Vt5bQTsznAvXdV_2PoNtG2x_ROWuylx2-rRlleKdQ_8hKQ.mp4' },
+        { category: 'snaps', title: 'Snap reel 5', src: 'media/reels/snap/Video-11407.mp4' },
+        { category: 'festive', title: 'Festive reel 5', src: 'media/reels/festive/AQOXwBW47Gk8of8LkX6I2BOt1mCjluydrmHs04eTHmdjrBm24qKg5k5KNI8067pO3UVxh_lnvGKvXLaoLya5lXGrzu6pFlj4p3H4umk.mp4' },
+        { category: 'snaps', title: 'Snap reel 6', src: 'media/reels/snap/Video-1271.mp4' },
+        { category: 'festive', title: 'Festive reel 6', src: 'media/reels/festive/AQP5SXIMBqbpd-c3UTfBUXhRsXI47qhuj90od2dFjMi2zbx8T31gRQ_lS0GLRObm-Y9vzQmjW_72JdAYg8VsvACX8bMJI8HNT_oHi6s.mp4' },
+        { category: 'snaps', title: 'Snap reel 7', src: 'media/reels/snap/Video-20810.mp4' },
+        { category: 'festive', title: 'Festive reel 7', src: 'media/reels/festive/AQP6NROBbhx92Zcrm7xHecPrOycVAVjW_Qedgr3kZwuKIpeER5Fv7AAdWWq1Mbso8Ui8F-8aPKoKBNcI3Shk61q-LOL_tcwLOwNV6iM.mp4' },
+        { category: 'snaps', title: 'Snap reel 8', src: 'media/reels/snap/Video-21188.mp4' },
+        { category: 'festive', title: 'Festive reel 8', src: 'media/reels/festive/AQPKaA0EtTeuV1PU_wkFVl02SNkLknUAeHzJuFScoWXxkV-KEZBlRdyIDCsnm7fKzqlMT95ZFK4ohX0U9CLFYUmPbGm0yiUzZ5Wn9pU.mp4' },
+        { category: 'snaps', title: 'Snap reel 9', src: 'media/reels/snap/Video-31973.mp4' },
+        { category: 'festive', title: 'Festive reel 9', src: 'media/reels/festive/Video-14517%20(1).mp4' },
+        { category: 'snaps', title: 'Snap reel 10', src: 'media/reels/snap/Video-39550.mp4' },
+        { category: 'festive', title: 'Festive reel 10', src: 'media/reels/festive/Video-39368.mp4' },
+        { category: 'snaps', title: 'Snap reel 11', src: 'media/reels/snap/Video-4081.mp4' },
+        { category: 'festive', title: 'Festive reel 11', src: 'media/reels/festive/Video-49501.mp4' },
+        { category: 'snaps', title: 'Snap reel 12', src: 'media/reels/snap/Video-45887.mp4' },
+        { category: 'festive', title: 'Festive reel 12', src: 'media/reels/festive/Video-70104.mp4' },
+        { category: 'snaps', title: 'Snap reel 13', src: 'media/reels/snap/Video-51050.mp4' },
+        { category: 'festive', title: 'Festive reel 13', src: 'media/reels/festive/Video-96035.mp4' },
+        { category: 'snaps', title: 'Snap reel 14', src: 'media/reels/snap/Video-552.mp4' },
+        { category: 'snaps', title: 'Snap reel 15', src: 'media/reels/snap/Video-58706.mp4' },
+        { category: 'snaps', title: 'Snap reel 16', src: 'media/reels/snap/Video-8268.mp4' },
+        { category: 'snaps', title: 'Snap reel 17', src: 'media/reels/snap/Video-84851.mp4' },
+        { category: 'snaps', title: 'Snap reel 18', src: 'media/reels/snap/VID_20260831_023146_829.mp4' },
+        { category: 'snaps', title: 'Snap reel 19', src: 'media/reels/snap/VID_20260831_023800_137.mp4' }
+      ];
+      const batchSize = 10;
+      let visibleVideoCount = batchSize;
+      let featuredIndex = 0;
+      const featuredVideo = document.getElementById('featuredVideo');
+      const videoPosition = document.getElementById('videoPosition');
+      const playbackStatus = document.getElementById('playbackStatus');
+      const loadMoreButton = document.getElementById('loadMoreVideos');
+      const featuredSpeed = document.getElementById('featuredSpeed');
+
+      function startVideo(video, status) {
+        video.play().then(() => {
+          status.textContent = '';
+        }).catch(() => {
+          status.textContent = 'Could not play this video in your browser.';
+        });
+      }
+
+      function selectFeaturedVideo(index, shouldPlay) {
+        featuredIndex = (index + videos.length) % videos.length;
+        featuredVideo.src = videos[featuredIndex].src;
+        featuredVideo.playbackRate = Number(featuredSpeed.value);
+        videoPosition.textContent = `${featuredIndex + 1} / ${videos.length}`;
+        playbackStatus.textContent = '';
+        featuredVideo.load();
+        if (shouldPlay) {
+          startVideo(featuredVideo, playbackStatus);
+        }
+      }
+
+      featuredSpeed.addEventListener('change', () => {
+        featuredVideo.playbackRate = Number(featuredSpeed.value);
+      });
+
+      function renderVideoCards() {
+        const visibleVideos = videos.slice(0, visibleVideoCount);
+        ['snaps', 'festive'].forEach((category) => {
+          const container = document.getElementById(`${category}Videos`);
+          const categoryVideos = visibleVideos.filter((video) => video.category === category);
+          container.innerHTML = categoryVideos.map((video) => `
+            <article class="video-card">
+              <video controls playsinline preload="metadata" aria-label="${video.title}">
+                <source src="${video.src}" type="video/mp4" />
+              </video>
+              <div class="video-copy">
+                <div class="label">${category}</div>
+                <h3>${video.title}</h3>
+                <label class="video-speed-control">
+                  <span>Speed</span>
+                  <select class="card-speed" aria-label="${video.title} playback speed">
+                    <option value="0.5">0.5× Slow</option>
+                    <option value="0.75">0.75×</option>
+                    <option value="1" selected>1× Normal</option>
+                    <option value="1.25">1.25×</option>
+                    <option value="1.5">1.5×</option>
+                    <option value="2">2× Fast</option>
+                  </select>
+                </label>
+                <p class="playback-status card-playback-status" aria-live="polite"></p>
+              </div>
+            </article>
+          `).join('');
+          container.querySelectorAll('.video-card').forEach((card) => {
+            const video = card.querySelector('video');
+            const speed = card.querySelector('.card-speed');
+            speed.addEventListener('change', () => {
+              video.playbackRate = Number(speed.value);
+            });
+          });
+        });
+        if (typeof bindVideoCards === 'function') bindVideoCards();
+        loadMoreButton.hidden = visibleVideoCount >= videos.length;
+      }
+
+      document.getElementById('previousVideo').addEventListener('click', () => {
+        selectFeaturedVideo(featuredIndex - 1, true);
+      });
+      document.getElementById('nextVideo').addEventListener('click', () => {
+        selectFeaturedVideo(featuredIndex + 1, true);
+      });
+      loadMoreButton.addEventListener('click', () => {
+        visibleVideoCount = Math.min(visibleVideoCount + batchSize, videos.length);
+        renderVideoCards();
+      });
+
+      selectFeaturedVideo(0, false);
+      renderVideoCards();
+    </script>
+    <script src="js/script.js?v=3"></script>
+  </body>
+</html>
